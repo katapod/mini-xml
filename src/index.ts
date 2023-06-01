@@ -1,0 +1,1 @@
+export { generateXMLFromObject } from './builder';
