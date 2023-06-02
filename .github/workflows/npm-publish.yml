@@ -16,9 +16,7 @@ jobs:
       - name: Install dependencies
         run: |
           yarn install
-          cd test
-          yarn install
-          cd ../
+          yarn test
 
       - name: Deployment Test Pipeline
         run: yarn deploy:test
