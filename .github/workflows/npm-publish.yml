@@ -35,9 +35,7 @@ jobs:
       - run: npm ci
       - run: |
           yarn install
-          cd test
-          yarn install
-          cd ../
+          yarn test
       - run: yarn build
       - run: npm publish
         env:
