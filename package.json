@@ -34,6 +34,10 @@
   "bugs": {
     "url": "https://github.com/Aerilym/mini-xml/issues"
   },
+  "files": [
+    "lib/",
+    "README.md"
+  ],
   "homepage": "https://github.com/Aerilym/mini-xml",
   "devDependencies": {
     "@tsconfig/node16": "^1.0.4",
@@ -54,6 +58,5 @@
     "ts-node": "^10.9.1",
     "typedoc": "^0.24.7",
     "typescript": "^5.0.4"
-  },
-  "dependencies": {}
+  }
 }
