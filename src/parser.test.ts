@@ -1,6 +1,4 @@
 import { generateObjectFromXML } from './parser';
-import axios from 'axios';
-import DomParser, { Node, NodeType } from 'dom-parser';
 import { generateXMLFromObject } from './builder';
 
 const cleanXML = `<?xml version="1.0" encoding="UTF-8"?>
