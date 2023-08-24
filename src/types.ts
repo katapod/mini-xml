@@ -1,16 +1,16 @@
-type XMLObject = {
+export type XMLObject = {
   [key: string]: XMLValueType | undefined;
 };
 
-type XMLAttributes = {
+export type XMLAttributes = {
   [key: string]: string;
 };
 
-type SupportedDataTypes = string | number | boolean | Date;
+export type SupportedDataTypes = string | number | boolean | Date;
 
-type XMLValueType = SupportedDataTypes | Array<SupportedDataTypes> | XMLObject | XMLObject[];
+export type XMLValueType = SupportedDataTypes | Array<SupportedDataTypes> | XMLObject | XMLObject[];
 
-interface GenerateXMLOptions {
+export interface GenerateXMLOptions {
   /** Whether to apply formatting */
   pretty?: boolean;
   /** The number of spaces to indent each level */
@@ -25,7 +25,7 @@ interface GenerateXMLOptions {
   formatDateFunction?: (date: Date) => string;
 }
 
-interface TagOptions {
+export interface TagOptions {
   /** The tag indentation depth */
   depth: number;
   /** Whether to apply formatting */

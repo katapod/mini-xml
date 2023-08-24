@@ -1,4 +1,5 @@
 import DomParser, { Node } from 'dom-parser';
+import type { XMLObject } from './types';
 
 interface CleanNode extends Node {
   jsonName: string;

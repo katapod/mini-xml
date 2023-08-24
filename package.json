@@ -3,7 +3,7 @@
   "version": "1.1.2",
   "description": "Build xml files from json objects",
   "main": "lib/index.js",
-  "types": "lib/main.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "lint": "eslint . --ext .ts",

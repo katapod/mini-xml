@@ -1,3 +1,5 @@
+import type { XMLValueType } from './types';
+
 /**
  * Replaces control characters with their escaped versions.
  * @param str - the string to replace the control characters in

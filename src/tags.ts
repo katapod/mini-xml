@@ -1,3 +1,4 @@
+import type { TagOptions, XMLAttributes } from './types';
 import { replaceInvalidXmlAttributeCharacters, replaceInvalidXmlCdataCharacters } from './utility';
 
 /**

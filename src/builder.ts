@@ -1,4 +1,11 @@
 import { cdataTag, tag, tagXmlHeader } from './tags';
+import type {
+  XMLObject,
+  GenerateXMLOptions,
+  XMLAttributes,
+  TagOptions,
+  XMLValueType,
+} from './types';
 import { handleStringify, replaceInvalidXmlElementBodyCharacters } from './utility';
 
 /**
