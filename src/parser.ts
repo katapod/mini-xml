@@ -1,6 +1,7 @@
 import DomParser, { Node } from 'dom-parser';
 import type { XMLObject } from './types';
 
+/** A node where the namespace is available (?) */
 interface CleanNode extends Node {
   jsonName: string;
 }
@@ -10,16 +11,14 @@ interface CleanNode extends Node {
  * @param node - The node to clean.
  * @returns The cleaned node.
  */
-function cleanNode(node: Node): CleanNode {
-  const cleanNode = node as CleanNode;
-  const sterilizedNode = JSON.stringify(cleanNode);
-  const namespace: string | null = JSON.parse(sterilizedNode).namespace;
-  if (namespace) {
-    cleanNode.jsonName = `${cleanNode.nodeName}:${namespace}`;
-  } else {
-    cleanNode.jsonName = cleanNode.nodeName;
-  }
+function createCleanNode(node: Node): CleanNode {
+  // Sterilization is required to access the namespace attribute for some reason
+  const sterilizedNode = JSON.stringify(node);
+  const namespace: string | undefined = JSON.parse(sterilizedNode).namespace;
 
+  const jsonName = namespace ? `${node.nodeName}:${namespace}` : node.nodeName;
+
+  const cleanNode = { ...node, jsonName };
   return cleanNode;
 }
 
@@ -54,7 +53,7 @@ export function generateObjectFromXML(xmlString: string): XMLObject {
   function xmlToJson(rawNode: Node): any {
     const data: any = {};
 
-    const node = cleanNode(rawNode);
+    const node = createCleanNode(rawNode);
 
     // TODO: Investigate parsing the link tags properly.
     if (node.jsonName === 'link') {
@@ -76,7 +75,8 @@ export function generateObjectFromXML(xmlString: string): XMLObject {
       node.childNodes.length === 0 ||
       (node.childNodes.length === 1 && node.childNodes[0].textContent)
     ) {
-      let text: string | undefined = node.textContent.trim();
+      // todo: fix this
+      let text: string | undefined = node.textContent?.trim();
 
       if (text === '') text = undefined;
       else if (textLinks.includes(text)) text = undefined;
@@ -99,7 +99,7 @@ export function generateObjectFromXML(xmlString: string): XMLObject {
     }
 
     for (let i = 0; i < node.childNodes.length; i++) {
-      const child = cleanNode(node.childNodes[i]);
+      const child = createCleanNode(node.childNodes[i]);
 
       const jsonNode = xmlToJson(child);
       if (jsonNode === undefined) continue;

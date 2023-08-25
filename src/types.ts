@@ -1,14 +1,15 @@
-export type XMLObject = {
-  [key: string]: XMLValueType | undefined;
-};
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface XMLObject extends Record<string, XMLValueType | undefined> {}
 
-export type XMLAttributes = {
-  [key: string]: string;
-};
+export type XMLAttributes = Record<string, string>;
 
 export type SupportedDataTypes = string | number | boolean | Date;
 
-export type XMLValueType = SupportedDataTypes | Array<SupportedDataTypes> | XMLObject | XMLObject[];
+export type XMLValueType =
+  | SupportedDataTypes
+  | Array<SupportedDataTypes>
+  | XMLObject
+  | Array<XMLObject>;
 
 export interface GenerateXMLOptions {
   /** Whether to apply formatting */
