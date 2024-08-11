@@ -1,16 +1,8 @@
 import { generateXMLFromObject } from '../src';
-import libxmljs from 'libxmljs';
+import { isValidXml } from '../src/tests';
 
 describe('Builder can create all RSS tags and attributes', () => {
-  const isValidSyntaxStructure = function (text: string) {
-    try {
-      libxmljs.parseXml(text);
-    } catch (e) {
-      return false;
-    }
-    return true;
-  };
-  it('creates a basic RSS Feed (rss, channel, title, lint, description)', () => {
+  it('creates a basic RSS Feed (rss, channel, title, lint, description)', async () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
@@ -32,9 +24,9 @@ describe('Builder can create all RSS tags and attributes', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(await isValidXml(generatedXML)).toEqual(true);
   });
-  it('supports tag: category', () => {
+  it('supports tag: category',  async () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
@@ -58,9 +50,9 @@ describe('Builder can create all RSS tags and attributes', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(await isValidXml(generatedXML)).toEqual(true);
   });
-  it('supports tag: category - domain', () => {
+  it('supports tag: category - domain',  async () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
@@ -87,9 +79,9 @@ describe('Builder can create all RSS tags and attributes', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(await isValidXml(generatedXML)).toEqual(true);
   });
-  it('supports tag: cloud', () => {
+  it('supports tag: cloud',  async () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
@@ -119,9 +111,9 @@ describe('Builder can create all RSS tags and attributes', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(await isValidXml(generatedXML)).toEqual(true);
   });
-  it('supports tag: copyright', () => {
+  it('supports tag: copyright', async  () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
@@ -145,9 +137,9 @@ describe('Builder can create all RSS tags and attributes', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(await isValidXml(generatedXML)).toEqual(true);
   });
-  it('supports tag: docs', () => {
+  it('supports tag: docs',  async () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
@@ -171,9 +163,9 @@ describe('Builder can create all RSS tags and attributes', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(await isValidXml(generatedXML)).toEqual(true);
   });
-  it('supports tag: generator - text and version', () => {
+  it('supports tag: generator - text and version',  async () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
@@ -197,9 +189,9 @@ describe('Builder can create all RSS tags and attributes', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(await isValidXml(generatedXML)).toEqual(true);
   });
-  it('supports tag: generator - link', () => {
+  it('supports tag: generator - link',  async () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
@@ -223,9 +215,9 @@ describe('Builder can create all RSS tags and attributes', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(await isValidXml(generatedXML)).toEqual(true);
   });
-  it('supports tag: image (link, title, url, description, height, width)', () => {
+  it('supports tag: image (link, title, url, description, height, width)',  async () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
@@ -263,9 +255,9 @@ describe('Builder can create all RSS tags and attributes', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(await isValidXml(generatedXML)).toEqual(true);
   });
-  it('supports tag: language', () => {
+  it('supports tag: language',  async () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
@@ -289,9 +281,9 @@ describe('Builder can create all RSS tags and attributes', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(await isValidXml(generatedXML)).toEqual(true);
   });
-  it('supports tag: lastBuildDate', () => {
+  it('supports tag: lastBuildDate', async  () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
@@ -327,12 +319,12 @@ describe('Builder can create all RSS tags and attributes', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(await isValidXml(generatedXML)).toEqual(true);
     const generatedXMLWithDateObject = generateXMLFromObject(jsonWithDateObject);
     expect(generatedXMLWithDateObject).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXMLWithDateObject)).toEqual(true);
+    expect(await isValidXml(generatedXMLWithDateObject)).toEqual(true);
   });
-  it('supports tag: managingEditor', () => {
+  it('supports tag: managingEditor',  async () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
@@ -356,9 +348,9 @@ describe('Builder can create all RSS tags and attributes', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(await isValidXml(generatedXML)).toEqual(true);
   });
-  it('supports tag: lastBuildDate', () => {
+  it('supports tag: lastBuildDate',  async () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
@@ -394,12 +386,12 @@ describe('Builder can create all RSS tags and attributes', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(await isValidXml(generatedXML)).toEqual(true);
     const generatedXMLWithDateObject = generateXMLFromObject(jsonWithDateObject);
     expect(generatedXMLWithDateObject).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXMLWithDateObject)).toEqual(true);
+    expect(await isValidXml(generatedXMLWithDateObject)).toEqual(true);
   });
-  it('supports tag: rating', () => {
+  it('supports tag: rating',  async () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
@@ -424,9 +416,9 @@ describe('Builder can create all RSS tags and attributes', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(await isValidXml(generatedXML)).toEqual(true);
   });
-  it('supports tag: skipDays', () => {
+  it('supports tag: skipDays',  async () => {
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
@@ -455,6 +447,6 @@ describe('Builder can create all RSS tags and attributes', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(xml);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(await isValidXml(generatedXML)).toEqual(true);
   });
 });

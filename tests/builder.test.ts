@@ -1,5 +1,5 @@
-import { generateXMLFromObject, getElements } from './builder';
-import libxmljs from 'libxmljs';
+import { generateXMLFromObject, getElements } from '../src/builder';
+import { isValidXml } from '../src/tests';
 
 describe('Builder functionality', () => {
   it('Creates empty XML from empty JSON', () => {
@@ -781,17 +781,8 @@ This
   });
 });
 
-describe('XML validates against libxmljs', () => {
-  const isValidSyntaxStructure = function (text: string) {
-    try {
-      libxmljs.parseXml(text);
-    } catch (e) {
-      return false;
-    }
-
-    return true;
-  };
-  it('should validate XML against XSD', () => {
+describe('XML validates against W3C', () => {
+  it('should validate XML', () => {
     const json = {
       root: {
         '@att': 'val',
@@ -803,6 +794,6 @@ describe('XML validates against libxmljs', () => {
     };
 
     const generatedXML = generateXMLFromObject(json);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(isValidXml(generatedXML)).toEqual(true);
   });
 });
