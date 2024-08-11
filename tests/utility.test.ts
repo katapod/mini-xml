@@ -2,7 +2,7 @@ import {
   replaceInvalidXmlElementBodyCharacters,
   replaceInvalidXmlAttributeCharacters,
   handleStringify,
-} from './utility';
+} from '../src/utility';
 
 describe('utility', () => {
   describe('replaceInvalidXmlElementBodyCharacters', () => {

@@ -1,15 +1,7 @@
 import { generateXMLFromObject } from '../src';
-import libxmljs from 'libxmljs';
+import { isValidXml } from '../src/tests';
 
 describe('Builder can create examples', () => {
-  const isValidSyntaxStructure = function (text: string) {
-    try {
-      libxmljs.parseXml(text);
-    } catch (e) {
-      return false;
-    }
-    return true;
-  };
   it('W3Schools RSS Feed', () => {
     const exampleXML = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
@@ -55,7 +47,7 @@ describe('Builder can create examples', () => {
 
     const generatedXML = generateXMLFromObject(json);
     expect(generatedXML).toEqual(exampleXML);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(isValidXml(generatedXML)).toEqual(true);
   });
   it('xul.fr RSS Feed', () => {
     const exampleXML = `<?xml version="1.0"?>
@@ -110,6 +102,6 @@ describe('Builder can create examples', () => {
 
     const generatedXML = generateXMLFromObject(json, { indentSpaces: 4, excludeXMLEncoding: true });
     expect(generatedXML).toEqual(exampleXML);
-    expect(isValidSyntaxStructure(generatedXML)).toEqual(true);
+    expect(isValidXml(generatedXML)).toEqual(true);
   });
 });
