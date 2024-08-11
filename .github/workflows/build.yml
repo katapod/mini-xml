@@ -27,8 +27,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          yarn install
+          pnpm install
 
       # Runs tests
       - name: Deployment Test Pipeline
-        run: yarn deploy:test
+        run: pnpm deploy:test
